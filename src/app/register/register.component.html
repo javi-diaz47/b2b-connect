@@ -12,7 +12,7 @@
         <div class="container-form">
             <div class="row">
                 <div class="col-8">
-                    <form>
+                    <form #registrar="ngForm" (ngSubmit)="onRegister()"> <!--Etiqueta para validar los campos-->
                         <div class="mb-3" class="text-center" style="margin-bottom: 25px;"><h4>Registrar</h4></div>
                         <div class="row">
                             <div class="col">
@@ -53,14 +53,14 @@
                             <div class="col">
                                 <div class="form-floating mb-3">
                                     <input type="password" class="form-control" id="floatingInput"
-                                        placeholder="name@example.com" required name="pwC">
+                                        placeholder="name@example.com" required name="pwC" [(ngModel)]="register.c_password">
                                     <label for="floatingInput">Confirmar</label>
                                 </div>
                             </div>
                         </div>
 
                         <div class="d-grid gap-2">
-                            <button class="btn btn-primary" type="submit">Enviar</button>
+                            <button class="btn btn-primary" type="submit" [disabled]="registrar.invalid">Registrar</button>
                         </div>
                     </form>
                 </div>

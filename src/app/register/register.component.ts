@@ -11,5 +11,11 @@ export class RegisterComponent {
     apellido: '',
     email: '',
     password: '',
+    c_password: '',
+  }
+
+  //Función para guardar con en la base de datos.
+  onRegister(){
+    console.log(this.register)
   }
 }

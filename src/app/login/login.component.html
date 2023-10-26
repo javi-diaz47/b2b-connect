@@ -11,14 +11,14 @@
         <div class="container-form">
             <div class="row">
                 <div class="col-8">
-                    <form>
+                    <form #login_user="ngForm" (ngSubmit)="onLogin()">
                         <div class="mb-3" class="text-center" style="margin-bottom: 25px;"><h4>Iniciar Sesion</h4></div>
                         
                         <div class="row">
                             <div class="col">
                                 <div class="form-floating mb-3">
                                     <input type="email" class="form-control" id="floatingInput"
-                                        placeholder="name@example.com">
+                                        placeholder="name@example.com" name="email" required [(ngModel)]="login.email">
                                     <label for="floatingInput">Email</label>
                                 </div>
                             </div>
@@ -29,14 +29,14 @@
                             <div class="col">
                                 <div class="form-floating mb-3">
                                     <input type="password" class="form-control" id="floatingInput"
-                                        placeholder="name@example.com">
+                                        placeholder="" required name="password" [(ngModel)]="login.password">
                                     <label for="floatingInput">password</label>
                                 </div>
                             </div>
                         </div>
 
                         <div class="d-grid gap-2">
-                            <button class="btn btn-primary" type="button">Enviar</button>
+                            <button class="btn btn-primary" type="submit" [disabled]="login_user.invalid">login</button>
                         </div>
                     </form>
                 </div>

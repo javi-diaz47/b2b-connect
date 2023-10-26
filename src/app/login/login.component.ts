@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
   title = "Login";
+
+  login = {
+    email: '',
+    password: ''
+  }
+
+  onLogin(){
+    console.log(this.login)
+  }
 }
