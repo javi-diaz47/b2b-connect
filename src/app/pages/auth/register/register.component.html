@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="container-form">
+        <div class="row">
+          <div class="col-8">
+            <form #registrar="ngForm" (ngSubmit)="onRegister()">
+              <!--Etiqueta para validar los campos-->
+              <div class="mb-3" class="text-center" style="margin-bottom: 25px">
+                <h4>Registrar</h4>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder=""
+                      [(ngModel)]="register.name"
+                      required
+                      name="name"
+                    />
+                    <label for="floatingInput">Nombre</label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder=""
+                      [(ngModel)]="register.lastname"
+                      required
+                      name="apellido"
+                    />
+                    <label for="floatingInput">Apellido</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="name@example.com"
+                      [(ngModel)]="register.email"
+                      required
+                      name="email"
+                    />
+                    <label for="floatingInput">Email</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder=""
+                      [(ngModel)]="register.password"
+                      required
+                      name="pw"
+                    />
+                    <label for="floatingInput">Password</label>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <div class="form-floating mb-3">
+                    <input
+                      type="password"
+                      class="form-control"
+                      id="floatingInput"
+                      placeholder="name@example.com"
+                      required
+                      name="pwC"
+                      [(ngModel)]="register.c_password"
+                    />
+                    <label for="floatingInput">Confirmar</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-grid gap-2">
+                <button
+                  class="btn btn-primary"
+                  type="submit"
+                  [disabled]="registrar.invalid"
+                >
+                  Registrar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
