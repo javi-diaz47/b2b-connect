@@ -21,7 +21,6 @@ export class UserComponent {
 
   async ngOnInit(): Promise<void> {
     await this.getUser();
-    console.log(this.user);
   }
 
   async getUser() {

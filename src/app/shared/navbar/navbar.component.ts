@@ -9,13 +9,13 @@ import { AuthService } from 'src/app/services/auth.service';
 export class NavbarComponent {
   user$ = this.authService.user$;
 
-  constructor(private readonly authService: AuthService) {
-    console.log(this.user$);
-  }
+  constructor(private readonly authService: AuthService) {}
 
   async onLogout(): Promise<void> {
     try {
       await this.authService.signOut();
+
+      localStorage.clear();
     } catch (error) {
       console.log(error);
     }

@@ -44,6 +44,14 @@ export class EditComponent {
   async onUpdateUser() {
     console.log('updating user');
     await this.authService.updateUser(this.user);
-    this.router.navigate(['account/user']);
+    // this.router.navigate(['account/user']);
+  }
+
+  async onUpdateProjects() {
+    await this.authService.updateProjects(this.user);
+  }
+
+  async onUpdateExperienceAreas() {
+    await this.authService.updateExperienceAreas(this.user);
   }
 }

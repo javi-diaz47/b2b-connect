@@ -49,7 +49,6 @@ export class AuthService {
         error,
       } = await this.supabaseClient.auth.signInWithPassword(credentials);
       this.setUser();
-      console.log(user);
 
       if (error) {
         console.log(error);
@@ -103,7 +102,6 @@ export class AuthService {
 
   private setUser(): void {
     const session = localStorage.getItem(USER_STORAGE_KEY) as unknown as User;
-    console.log(session);
     this.userSubject.next(session);
   }
 
@@ -115,9 +113,10 @@ export class AuthService {
     try {
       let { data: user, error } = await this.supabaseClient
         .from('users')
-        .select('*, projects (*)')
+        .select('*, projects (*), experienceAreas (*)')
         .eq('id', id)
         .eq('projects.user_id', id)
+        .eq('experienceAreas.user_id', id)
         .limit(1)
         .single();
 
@@ -134,12 +133,51 @@ export class AuthService {
   }
 
   async updateUser(user: UserWithProjects): Promise<any> {
+    const { projects, experienceAreas, ...update } = user;
+    console.log(update);
     try {
       const { data, error } = await this.supabaseClient
         .from('users')
-        .update({ history: user.history })
-        .eq('id', user.id)
-        .select();
+        .upsert(update)
+        .eq('id', update.id);
+
+      if (error) {
+        console.log(error);
+      }
+
+      alert('Se actualizaron los datos de manera satisfactoria');
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async updateProjects(user: UserWithProjects): Promise<any> {
+    try {
+      const { data, error } = await this.supabaseClient
+        .from('projects')
+        .upsert(user.projects);
+
+      if (error) {
+        console.log(error);
+      }
+
+      alert('Se actualizaron los datos de manera satisfactoria');
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async updateExperienceAreas(user: UserWithProjects): Promise<any> {
+    try {
+      const { data, error } = await this.supabaseClient
+        .from('experienceAreas')
+        .upsert(user.experienceAreas);
+
+      if (error) {
+        console.log(error);
+      }
+
+      alert('Se actualizaron los datos de manera satisfactoria');
     } catch (error) {
       console.log(error);
     }

@@ -1,1 +1,64 @@
-<p>Hello {{ user.name }}</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <!-- <img
+        src="https://via.placeholder.com/150x150.png?text=Logo+de+la+empresa"
+        alt="Logo de la empresa"
+        class="img-fluid rounded-circle mb-3"
+      /> -->
+      <h1>{{ user.name + " " + user.lastname }}</h1>
+    </div>
+  </div>
+  <div class="row align-items-center">
+    <div class="col">
+      <div class="row mt-5">
+        <div class="col-md-12">
+          <h2>Objetivos</h2>
+          <p>
+            {{ user.objetives }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row mt-5">
+        <div class="col-md-12">
+          <h2>Historia</h2>
+          <p>
+            {{ user.history }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row align-items-center">
+    <div class="col">
+      <div class="row mt-5">
+        <div class="col-md-12">
+          <h2>Proyectos</h2>
+          <ul *ngFor="let project of user.projects">
+            <li>
+              {{ project.title }}
+              <p>{{ project.description }}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="row mt-5">
+        <div class="col-md-12">
+          <h2>Áreas de experiencia</h2>
+          <ul *ngFor="let area of user.experienceAreas">
+            <li>{{ area.area }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-grid gap-2">
+    <a class="btn btn-primary" href="account/edit"> Editar perfil </a>
+  </div>
+</div>
