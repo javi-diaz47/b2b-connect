@@ -132,4 +132,16 @@ export class AuthService {
       console.log(error);
     }
   }
+
+  async updateUser(user: UserWithProjects): Promise<any> {
+    try {
+      const { data, error } = await this.supabaseClient
+        .from('users')
+        .update({ history: user.history })
+        .eq('id', user.id)
+        .select();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

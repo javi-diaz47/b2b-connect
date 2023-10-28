@@ -21,11 +21,11 @@ export class RegisterComponent {
   constructor(private readonly authService: AuthService) {}
 
   register: RegisterVerifyEmail = {
-    name: 'javi',
-    lastname: 'diaz1',
-    email: 'javiereduardo300@gmail.com',
-    password: 'pass',
-    c_password: 'pass',
+    name: '',
+    lastname: '',
+    email: '',
+    password: '',
+    c_password: '',
   };
 
   //Función para guardar con en la base de datos.
