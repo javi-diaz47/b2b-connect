@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 import { USER_STORAGE_KEY } from '../shared/constants/constants';
 import { Router } from '@angular/router';
 import { Register } from '../pages/auth/register/register.component';
+import { UserWithProjects } from 'src/types';
 
 type supabaseResponse = User | Session | AuthError | null;
 
@@ -24,6 +25,12 @@ export class AuthService {
 
   get user$(): Observable<User | null> {
     return this.userSubject.asObservable();
+  }
+
+  private userWithProject = new BehaviorSubject<UserWithProjects | null>(null);
+
+  get userWithProject$(): Observable<UserWithProjects | null> {
+    return this.userWithProject.asObservable();
   }
 
   constructor(private router: Router) {
@@ -98,5 +105,31 @@ export class AuthService {
     const session = localStorage.getItem(USER_STORAGE_KEY) as unknown as User;
     console.log(session);
     this.userSubject.next(session);
+  }
+
+  private setUserWithProject(user: UserWithProjects): void {
+    this.userWithProject.next(user);
+  }
+
+  async getUser(id: string): Promise<any> {
+    try {
+      let { data: user, error } = await this.supabaseClient
+        .from('users')
+        .select('*, projects (*)')
+        .eq('id', id)
+        .eq('projects.user_id', id)
+        .limit(1)
+        .single();
+
+      if (error) {
+        console.log(error);
+        return error;
+      }
+
+      await this.setUserWithProject(user as unknown as UserWithProjects);
+      return user && (user as unknown as UserWithProjects);
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
