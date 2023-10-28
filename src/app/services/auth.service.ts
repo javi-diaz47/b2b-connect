@@ -12,6 +12,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { USER_STORAGE_KEY } from '../shared/constants/constants';
 import { Router } from '@angular/router';
+import { Register } from '../pages/auth/register/register.component';
 
 type supabaseResponse = User | Session | AuthError | null;
 
@@ -41,6 +42,7 @@ export class AuthService {
         error,
       } = await this.supabaseClient.auth.signInWithPassword(credentials);
       this.setUser();
+      console.log(user);
 
       if (error) {
         console.log(error);
@@ -55,20 +57,30 @@ export class AuthService {
     }
   }
 
-  async register(
-    credentials: SignInWithPasswordCredentials
-  ): Promise<supabaseResponse> {
+  async register(register: Register): Promise<supabaseResponse> {
+    const credentials = {
+      email: register.email,
+      password: register.password,
+      options: {
+        data: {
+          name: register.name,
+          lastname: register.lastname,
+        },
+      },
+    };
+
     try {
       const {
         data: { user, session },
         error,
       } = await this.supabaseClient.auth.signUp(credentials);
-      this.setUser();
+
       if (error) {
         alert(error.message);
       } else {
         alert('Te hemos enviado un correo para verificarte como usuario');
       }
+
       return error ? error : user;
     } catch (error) {
       console.log(error);
@@ -84,6 +96,7 @@ export class AuthService {
 
   private setUser(): void {
     const session = localStorage.getItem(USER_STORAGE_KEY) as unknown as User;
+    console.log(session);
     this.userSubject.next(session);
   }
 }

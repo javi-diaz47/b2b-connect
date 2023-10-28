@@ -5,8 +5,14 @@ import { RegisterComponent } from './pages/auth/register/register.component';
 import { UserComponent } from './pages/account/user/user.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+  },
   { path: 'account/user', component: UserComponent },
 
   // Otras rutas aquí

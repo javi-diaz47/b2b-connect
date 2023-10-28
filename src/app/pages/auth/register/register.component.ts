@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 
-interface Register {
+export interface Register {
   name: string;
   lastname: string;
   email: string;
