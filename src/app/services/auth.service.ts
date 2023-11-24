@@ -14,6 +14,7 @@ import { USER_STORAGE_KEY } from '../shared/constants/constants';
 import { Router } from '@angular/router';
 import { Register } from '../pages/auth/register/register.component';
 import { UserWithProjects } from 'src/types';
+import { SupabaseAuthClient } from '@supabase/supabase-js/dist/module/lib/SupabaseAuthClient';
 
 type supabaseResponse = User | Session | AuthError | null;
 
@@ -60,6 +61,32 @@ export class AuthService {
     } catch (error) {
       console.log(error);
       return error as AuthApiError;
+    }
+  }
+
+  async loginWithGoogle() {
+    try {
+      const { data: error } = await this.supabaseClient.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          scopes: 'https://www.googleapis.com/auth/calendar',
+        },
+      });
+
+      if (error) {
+        console.log(error);
+        return;
+      }
+
+      const {
+        data: { user },
+      } = await this.supabaseClient.auth.getUser();
+      console.log(user);
+      console.log('lol');
+      this.setUser();
+      this.router.navigate(['account/user']);
+    } catch (error) {
+      console.log(error);
     }
   }
 
