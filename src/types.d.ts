@@ -24,3 +24,28 @@ export interface ExpirienceArea {
   area?: string;
   created_at: string;
 }
+
+export interface CalendarEvent {
+  summary: string;
+  description: string;
+  start: {
+    dateTime: string;
+    timeZone: string;
+  };
+  end: {
+    dateTime: string;
+    timeZone: string;
+  };
+  location?: string;
+  conferenceData?: {
+    createRequest: {
+      requestId: string;
+      conferenceSolutionKey: { type: string };
+    };
+  };
+  attendees?: {
+    email: string;
+  }[];
+}
+
+export type isValidAttendee = 'VALID' | 'NOT VALID' | 'DUPLICATED';

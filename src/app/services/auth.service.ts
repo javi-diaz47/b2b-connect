@@ -82,7 +82,6 @@ export class AuthService {
         data: { user },
       } = await this.supabaseClient.auth.getUser();
       console.log(user);
-      console.log('lol');
       this.setUser();
       this.router.navigate(['account/user']);
     } catch (error) {

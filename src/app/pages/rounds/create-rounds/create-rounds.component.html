@@ -1,0 +1,60 @@
+<h2>Rueda de negocios</h2>
+<div>
+  <label>Nombre del evento:</label>
+  <input type="text" [(ngModel)]="event.summary" />
+</div>
+<div>
+  <label>Descripcion:</label>
+  <input type="text" [(ngModel)]="event.description" />
+</div>
+<div>
+  <label for="meet-start-time">Inicio:</label>
+  <input
+    type="datetime-local"
+    id="meet-start-time"
+    name="meeting-start-time"
+    [(ngModel)]="event.start.dateTime"
+  />
+</div>
+<div>
+  <label for="meet-end-time">Fin:</label>
+  <input
+    type="datetime-local"
+    id="meet-end-time"
+    name="meeting-end-time"
+    [(ngModel)]="event.end.dateTime"
+  />
+</div>
+<!-- <div>
+  <input [(ngModel)]="inputAttendee" placeholder="Enter a value" />
+  <button (click)="addAttendee()">Add</button>
+</div>
+
+<ul>
+  <li *ngFor="let attendee of event.attendees">{{ attendee }}</li>
+</ul> -->
+
+<div>
+  <input [(ngModel)]="inputAttendee" placeholder="Enter attendee email" />
+  <button (click)="addAttendee()">Add Attendee</button>
+</div>
+
+<div *ngIf="isValidAttendee === 'NOT VALID'">
+  <p>Por favor, ingresa un correo electronico valida</p>
+</div>
+
+<div *ngIf="isValidAttendee === 'DUPLICATED'">
+  <p>Este correo ya está en la lista de asistentes</p>
+</div>
+
+<div *ngIf="event.attendees && event.attendees.length">
+  <h4>Lista de invitados</h4>
+  <ul>
+    <li *ngFor="let attendee of event.attendees">
+      {{ attendee.email }}
+      <button (click)="removeAttendee(attendee.email)">Remove</button>
+    </li>
+  </ul>
+</div>
+
+<button (click)="createEvent()">Crear rueda de negocios</button>
