@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4 d-flex">
+  <div class="container-fluid col">
     <a
       aria-current="page"
       routerLink="login"
@@ -20,7 +20,45 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ng-container *ngIf="(user$ | async) === null; else logOutTemplate">
+      <ng-container *ngIf="user">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              routerLink="login"
+              href="account/user"
+            >
+              Mi Perfil
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              routerLink="login"
+              href="rounds/create-rounds"
+            >
+              Crear Rueda
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              routerLink="register"
+              href="rounds/my-rounds"
+            >
+              Mis ruedas
+            </a>
+          </li>
+        </ul>
+      </ng-container>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ng-container *ngIf="!user; else logOutTemplate">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a
@@ -59,16 +97,6 @@
           </li>
         </ul>
       </ng-template>
-
-      <!-- <form class="d-flex" role="search">
-        <input
-          class="form-control me-2"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-        />
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form> -->
     </div>
   </div>
 </nav>
