@@ -85,6 +85,8 @@
       </div>
     </div>
   </div>
+
+  <!-- Projects -->
   <div class="container-form">
     <div class="row">
       <div class="col-8 mt-5">
@@ -184,34 +186,38 @@
   <div class="container-form">
     <div class="row">
       <div class="col-8 mt-5">
-        <form #login_user="ngForm" (ngSubmit)="onUpdateExperienceAreas()">
-          <div class="mb-3" class="text-center" style="margin-bottom: 25px">
-            <h4>Editar Areas de Experiencia</h4>
+        <div>
+          <input
+            [(ngModel)]="inputExperienceArea"
+            placeholder="Ingresa un area de experiencia"
+            list="experience-areas"
+          />
+          <div *ngIf="isExperienceAreaDuplicated">
+            <p>Ya tienes esta area de experiencia en tu lista</p>
           </div>
+          <datalist id="experience-areas">
+            <option *ngFor="let area of AREAS" value="{{ area.area }}"></option>
+          </datalist>
+          <button (click)="addExperienceArea()">
+            Agregar area de experiencia
+          </button>
+        </div>
 
-          <div *ngFor="let area of user.experienceAreas">
-            <div class="row">
-              <div class="col">
-                <div class="form-floating mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="name@example.com"
-                    name="title-{{ area.id }}"
-                    [(ngModel)]="area.area"
-                  />
-                  <label for="floatingInput">Area</label>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div *ngIf="user.userExperienceAreas">
+          <h4>Areas de Experiencia</h4>
+          <ul>
+            <li *ngFor="let area of user.userExperienceAreas">
+              {{ area.area }}
+              <button (click)="removeExperienceArea(area.id || '')">
+                Remove
+              </button>
+            </li>
+          </ul>
+        </div>
 
-          <div class="d-grid gap-2">
-            <button class="btn btn-primary" type="submit">
-              Actualizar mis datos
-            </button>
-          </div>
-        </form>
+        <div class="d-grid gap-2" (click)="onUpdateExperienceAreas()">
+          <button class="btn btn-primary">Actualizar misaaa datos</button>
+        </div>
       </div>
     </div>
   </div>

@@ -139,10 +139,10 @@ export class AuthService {
     try {
       let { data: user, error } = await this.supabaseClient
         .from('users')
-        .select('*, projects (*), experienceAreas (*)')
+        .select('*, projects (*), userExperienceAreas (*) ')
         .eq('id', id)
         .eq('projects.user_id', id)
-        .eq('experienceAreas.user_id', id)
+        .eq('userExperienceAreas.user_id', id)
         .limit(1)
         .single();
 
@@ -159,7 +159,7 @@ export class AuthService {
   }
 
   async updateUser(user: UserWithProjects): Promise<any> {
-    const { projects, experienceAreas, ...update } = user;
+    const { projects, userExperienceAreas, ...update } = user;
     console.log(update);
     try {
       const { data, error } = await this.supabaseClient
@@ -219,14 +219,31 @@ export class AuthService {
   async updateExperienceAreas(user: UserWithProjects): Promise<any> {
     try {
       const { data, error } = await this.supabaseClient
-        .from('experienceAreas')
-        .upsert(user.experienceAreas);
+        .from('userExperienceAreas')
+        .upsert(user.userExperienceAreas);
 
       if (error) {
         console.log(error);
       }
 
       alert('Se actualizaron los datos de manera satisfactoria');
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async removeExperienceArea(id: string): Promise<any> {
+    try {
+      const { data, error } = await this.supabaseClient
+        .from('userExperienceArea')
+        .delete()
+        .eq('id', id);
+
+      if (error) {
+        console.log(error);
+      }
+
+      alert('Se elimino proyecto de manera satisfactoria');
     } catch (error) {
       console.log(error);
     }

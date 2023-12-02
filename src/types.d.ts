@@ -7,7 +7,7 @@ export interface UserWithProjects {
   history?: string;
   objetives?: string;
   projects?: Project[];
-  experienceAreas?: ExpirienceArea[];
+  userExperienceAreas?: ExperienceArea[];
 }
 
 export interface Project {
@@ -18,11 +18,12 @@ export interface Project {
   created_at?: string;
 }
 
-export interface ExpirienceArea {
+export interface ExperienceArea {
   id: string;
-  user_id: string;
-  area?: string;
-  created_at: string;
+  user_id?: string;
+  area_id?: string;
+  area: string;
+  created_at?: string;
 }
 
 export interface CalendarEvent {
