@@ -88,47 +88,86 @@
   <div class="container-form">
     <div class="row">
       <div class="col-8 mt-5">
+        <!-- Add new project -->
+        <div>
+          <div class="mb-3" class="text-center" style="margin-bottom: 25px">
+            <h4>Agregar un nuevo proyecto</h4>
+          </div>
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              required
+              class="form-control"
+              id="floatingInput"
+              placeholder="name@example.com"
+              name="title-{{ inputProject.id }}"
+              [(ngModel)]="inputProject.title"
+            />
+            <label for="floatingInput">Titulo</label>
+          </div>
+          <div class="form-floating mb-3">
+            <textarea
+              class="form-control h-8"
+              required
+              id="floatingInput"
+              placeholder=""
+              name="description-{{ inputProject.id }}"
+              rows="4"
+              [(ngModel)]="inputProject.description"
+            ></textarea>
+            <label for="floatingInput">Descripcion</label>
+          </div>
+
+          <!-- If not filled the inputs -->
+          <div *ngIf="unfilledNewProject === true">
+            <p>Por favor, rellene todos los campos</p>
+          </div>
+
+          <button type="button" (click)="addProject()">Agregar proyecto</button>
+        </div>
+
         <form #login_user="ngForm" (ngSubmit)="onUpdateProjects()">
           <div class="mb-3" class="text-center" style="margin-bottom: 25px">
             <h4>Editar Proyectos</h4>
           </div>
 
-          <div *ngFor="let project of user.projects">
-            <div class="mb-3" class="text-center" style="margin-bottom: 25px">
-              <h6>Proyecto</h6>
-            </div>
+          <div>
+            <!-- Edit old projects -->
+            <ul class="m-0 p-0">
+              <li *ngFor="let project of user.projects" class="list-unstyled">
+                <div
+                  class="mb-3"
+                  class="text-center"
+                  style="margin-bottom: 25px"
+                >
+                  <h6>{{ project.title }}</h6>
+                </div>
 
-            <div class="row">
-              <div class="col">
                 <div class="form-floating mb-3">
                   <input
                     type="text"
                     class="form-control"
-                    id="floatingInput"
                     placeholder="name@example.com"
                     name="title-{{ project.id }}"
                     [(ngModel)]="project.title"
                   />
-                  <label for="floatingInput">Nombre</label>
+                  <label for="floatingInput">Titulo</label>
                 </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col">
                 <div class="form-floating mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="floatingInput"
+                  <textarea
+                    class="form-control h-8"
                     placeholder=""
                     name="description-{{ project.id }}"
+                    rows="4"
                     [(ngModel)]="project.description"
-                  />
-                  <label for="floatingInput">Apellido</label>
+                  ></textarea>
+                  <label for="floatingInput">Descripcion</label>
                 </div>
-              </div>
-            </div>
+                <button (click)="removeProject(project.id || '')">
+                  Remove
+                </button>
+              </li>
+            </ul>
           </div>
 
           <div class="d-grid gap-2">
@@ -140,6 +179,8 @@
       </div>
     </div>
   </div>
+
+  <!-- Experience Area -->
   <div class="container-form">
     <div class="row">
       <div class="col-8 mt-5">
@@ -155,7 +196,6 @@
                   <input
                     type="text"
                     class="form-control"
-                    id="floatingInput"
                     placeholder="name@example.com"
                     name="title-{{ area.id }}"
                     [(ngModel)]="area.area"

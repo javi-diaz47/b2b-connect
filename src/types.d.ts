@@ -11,11 +11,11 @@ export interface UserWithProjects {
 }
 
 export interface Project {
-  id: string;
-  user_id: string;
-  title?: string;
-  description?: string;
-  created_at: string;
+  id?: string;
+  user_id?: string;
+  title: string;
+  description: string;
+  created_at?: string;
 }
 
 export interface ExpirienceArea {

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Session } from '@supabase/supabase-js';
 import { AuthService } from 'src/app/services/auth.service';
 import { USER_STORAGE_KEY } from 'src/app/shared/constants/constants';
-import { UserWithProjects } from 'src/types';
+import { Project, UserWithProjects } from 'src/types';
 
 @Component({
   selector: 'app-edit',
@@ -17,6 +17,8 @@ export class EditComponent {
     name: '',
     lastname: '',
     created_at: '',
+    projects: [],
+    experienceAreas: [],
   };
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -37,6 +39,7 @@ export class EditComponent {
 
       if (user) {
         this.user = user;
+        console.log(user.projects);
       }
     }
   }
@@ -53,5 +56,45 @@ export class EditComponent {
 
   async onUpdateExperienceAreas() {
     await this.authService.updateExperienceAreas(this.user);
+  }
+
+  // Projects
+
+  inputProject: Project = {
+    id: crypto.randomUUID(),
+    user_id: this.user.id,
+    title: '',
+    description: '',
+  };
+
+  unfilledNewProject = false;
+
+  addProject() {
+    if (
+      this.user.projects &&
+      this.inputProject.title &&
+      this.inputProject.description
+    ) {
+      this.user.projects.push(this.inputProject);
+      console.log(this.user.projects);
+      this.inputProject = {
+        id: crypto.randomUUID(),
+        title: '',
+        description: '',
+      }; // Clear the input field
+      this.unfilledNewProject = false;
+      return;
+    }
+    this.unfilledNewProject = true;
+  }
+
+  removeProject(id: string) {
+    if (this.user.projects) {
+      this.user.projects = this.user.projects.filter(
+        (project) => project.id !== id
+      );
+    }
+
+    this.authService.removeProject(id);
   }
 }

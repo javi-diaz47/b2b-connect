@@ -178,16 +178,39 @@ export class AuthService {
   }
 
   async updateProjects(user: UserWithProjects): Promise<any> {
+    console.log(user.projects);
+    const projects = user.projects?.map((p) => {
+      p.user_id = user.id;
+      return p;
+    });
+
     try {
       const { data, error } = await this.supabaseClient
         .from('projects')
-        .upsert(user.projects);
+        .upsert(projects);
 
       if (error) {
         console.log(error);
       }
 
       alert('Se actualizaron los datos de manera satisfactoria');
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async removeProject(id: string): Promise<any> {
+    try {
+      const { data, error } = await this.supabaseClient
+        .from('projects')
+        .delete()
+        .eq('id', id);
+
+      if (error) {
+        console.log(error);
+      }
+
+      alert('Se elimino proyecto de manera satisfactoria');
     } catch (error) {
       console.log(error);
     }
