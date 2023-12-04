@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
-  </head>
 
-  <body>
-    <app-navbar></app-navbar>
-    <!--
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+</head>
+
+<body>
+  <app-navbar></app-navbar>
+  <!--
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <a class="navbar-brand" routerLink="/">Home</a>
@@ -42,16 +39,86 @@
     </div>
   </nav> -->
 
-    <div class="container">
+  <div class="container">
+    <div class="container h-25">
       <div class="row">
-        <div class="col"></div>
+        <div class="col d-flex align-items-center">
+          <div>
+            <h1 class="fs-1">Crea tu Propia Rueda de Negocios</h1>
+            <p class="fs-5">Con B2B connect descubre una nueva forma de conectar y potenciar tu red de contactos con
+              nuestra aplicación. Crea, gestiona y expande tu propia rueda de negocios de manera sencilla y efectiva.
+            </p>
+            <button type="button" class="btn btn-primary btn-lg">Registrate</button>
+          </div>
+
+        </div>
+
+
+        <div class="col">
+          <img class="img-fluid" style="height: 600px;" src="../assets/img/Meeting-bro.png" alt="">
+        </div>
+      </div>
+
+    </div>
+
+    <hr class="hr" />
+    <div class="container">
+      <div class="row text-center">
+        <h1>Caracteristicas</h1>
+      </div>
+      <div class="row justify-content-center text-center">
+        <div class="col-3 py-4">
+          <div class="row">
+            <img src="../assets/img/handshake.png" alt="">
+          </div>
+          <div class="row">
+            <p>Conecta con profesionales de tu industria y crea relaciones comerciales sólidas con nuestra herramienta
+            </p>
+          </div>
+        </div>
+        <div class="col-3 py-4">
+          <div class="row">
+            <img src="../assets/img/simplicity.png" alt="">
+          </div>
+          <div class="row">
+            <p>Crear una rueda de negocios nunca habia sido tan facil, con un solo clic lo puedes hacer</p>
+          </div>
+        </div>
+        <div class="col-3 py-4">
+          <div class="row">
+            <img src="../assets/img/pin.png" alt="">
+          </div>
+          <div class="row">
+            <p>Organiza y participa en ruedas de negocio desde cualquier parte del mundo, gracias a nuestra plataforma
+              virtual que brinda una experiencia interactiva y efectiva</p>
+          </div>
+        </div>
       </div>
     </div>
-    <router-outlet></router-outlet>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+    
+  </div>
+  <footer style="background-color: black; padding: 20px 0;">
+    <div class=" container mt-5 text-white">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>Quiénes Somos</h5>
+          <p>B2B connect ayudandote.</p>
+        </div>
+        <div class="col-md-4">
+          <h5>Contactanos</h5>
+          <p>Teléfono: 123-456-789</p>
+        </div>
+        <div class="col-md-4">
+          <h5>Correo Electrónico</h5>
+          <p>Correo: b2b@gmail.com</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <router-outlet></router-outlet>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>
