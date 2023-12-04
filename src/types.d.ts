@@ -69,11 +69,13 @@ interface CalendarEvent {
         statusCode: string;
       };
     };
-    entryPoints?: {
-      entryPointType: string;
-      uri: string;
-      label: string;
-    }[];
+    entryPoints?: [
+      {
+        entryPointType: string;
+        uri: string;
+        label: string;
+      }
+    ];
     conferenceSolution?: {
       key: {
         type: string;

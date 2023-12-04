@@ -275,4 +275,30 @@ export class AuthService {
       console.log(error);
     }
   }
+
+  async getRoundsId(): Promise<GetRoundsId> {
+    const userId = await this.getUserId();
+    try {
+      const { data, error } = await this.supabaseClient
+        .from('rounds')
+        .select('event_id')
+        .eq('user_id', userId);
+
+      if (error) {
+        throw new Error();
+      }
+
+      return { rounds_ids: data };
+    } catch (error) {
+      console.log(error);
+      return { error };
+    }
+  }
+}
+
+interface GetRoundsId {
+  rounds_ids?: {
+    event_id: string;
+  }[];
+  error?: any;
 }

@@ -61,10 +61,10 @@ export class CalendarService {
       });
   }
 
-  async getEvents(): Promise<GetEvents> {
+  async getEvent(id: string) {
     const { email, providerToken } = this.getEmailAndProviderToken();
 
-    return await fetch(CALENDAR_API, {
+    return await fetch(`${CALENDAR_API}/${id}`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${providerToken}`,
@@ -77,6 +77,18 @@ export class CalendarService {
         console.log(data);
         return data;
       });
+  }
+
+  async getEvents(ids: string[]): Promise<any> {
+    return Promise.all(
+      ids.map(async (id) => {
+        return await this.getEvent(id)
+          .then((data) => {
+            return data;
+          })
+          .catch((error) => console.log(error));
+      })
+    );
   }
 }
 

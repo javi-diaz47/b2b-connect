@@ -1,1 +1,24 @@
-<p>my-rounds works!</p>
+<h2>Mis Ruedas de negocios</h2>
+<ul *ngFor="let event of events">
+  <li>
+    <h4>{{ event.summary }}</h4>
+    <p>{{ event.description }}</p>
+
+    <div *ngIf="this.events[0].conferenceData?.entryPoints">
+      <div *ngFor="let meet of event.conferenceData?.entryPoints">
+        <img
+          src="{{ event.conferenceData?.conferenceSolution?.iconUri }}"
+          width="32"
+          height="32"
+        />
+        {{ meet.uri }}
+      </div>
+    </div>
+
+    <div *ngIf="event.status && event.start.dateTime && event.end.dateTime">
+      <p>Estado: Inicio: {{ event.status }}</p>
+      <p>Inicio: {{ event.start.dateTime }}</p>
+      <p>Fin:{{ event.end.dateTime }}</p>
+    </div>
+  </li>
+</ul>

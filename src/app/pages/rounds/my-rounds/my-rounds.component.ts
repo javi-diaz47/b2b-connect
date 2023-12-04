@@ -17,11 +17,16 @@ export class MyRoundsComponent {
   events: CalendarEvent[] = [];
 
   async getCalendarEvents() {
-    const events = await this.calendarService.getEvents();
+    const res = await this.authService.getRoundsId();
 
-    // this.events = events;
+    if (res.rounds_ids) {
+      const eventIds = await res.rounds_ids.map(({ event_id }) => event_id);
+      const events = await this.calendarService.getEvents(eventIds);
 
-    console.log(events);
+      this.events = await events;
+
+      console.log(this.events);
+    }
   }
 
   async ngOnInit(): Promise<void> {
