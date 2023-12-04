@@ -3,7 +3,7 @@ import { ExperienceArea } from 'src/types';
 export const USER_STORAGE_KEY = 'sb-suusckxcfrvhdtlfjleu-auth-token';
 export const USER = 'user';
 export const CALENDAR_API =
-  'https://www.googleapis.com/calendar/v3/calendars/primary/events?conferenceDataVersion=1';
+  'https://www.googleapis.com/calendar/v3/calendars/primary/events';
 
 export const EXPERIENCE_AREAS: ExperienceArea[] = [
   {

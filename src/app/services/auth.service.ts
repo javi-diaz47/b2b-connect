@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 import { USER_STORAGE_KEY } from '../shared/constants/constants';
 import { Router } from '@angular/router';
 import { Register } from '../pages/auth/register/register.component';
-import { UserWithProjects } from 'src/types';
+import { Round, UserWithProjects } from 'src/types';
 import { SupabaseAuthClient } from '@supabase/supabase-js/dist/module/lib/SupabaseAuthClient';
 
 type supabaseResponse = User | Session | AuthError | null;
@@ -158,6 +158,19 @@ export class AuthService {
     }
   }
 
+  async getUserId(): Promise<string> {
+    let localSession = localStorage.getItem(USER_STORAGE_KEY);
+    if (localSession) {
+      const session: Session = JSON.parse(localSession);
+      const {
+        user: { id },
+      } = session;
+
+      return id;
+    }
+    return 'Not Found';
+  }
+
   async updateUser(user: UserWithProjects): Promise<any> {
     const { projects, userExperienceAreas, ...update } = user;
     console.log(update);
@@ -244,6 +257,20 @@ export class AuthService {
       }
 
       alert('Se elimino proyecto de manera satisfactoria');
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async addRound(round: Round): Promise<any> {
+    try {
+      const { data, error } = await this.supabaseClient
+        .from('rounds')
+        .insert(round);
+      if (error) {
+        console.log(error);
+      }
+      alert('Se actualizaron los datos de manera satisfactoria');
     } catch (error) {
       console.log(error);
     }

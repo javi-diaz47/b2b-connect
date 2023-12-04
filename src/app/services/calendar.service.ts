@@ -41,7 +41,7 @@ export class CalendarService {
       },
     };
 
-    await fetch(CALENDAR_API, {
+    return await fetch(`${CALENDAR_API}?conferenceDataVersion=1`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${providerToken}`,
@@ -56,6 +56,7 @@ export class CalendarService {
         if (!data.error) {
           alert('La rueda de negocios fue agendada con exito!');
         }
+        return data;
       });
   }
 }

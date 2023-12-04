@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { CalendarService } from 'src/app/services/calendar.service';
-import { CalendarEvent, isValidAttendee } from 'src/types';
+import { CalendarEvent, Round, isValidAttendee } from 'src/types';
 
 @Component({
   selector: 'app-create-rounds',
@@ -8,7 +9,10 @@ import { CalendarEvent, isValidAttendee } from 'src/types';
   styleUrls: ['./create-rounds.component.scss'],
 })
 export class CreateRoundsComponent {
-  constructor(private readonly calendarService: CalendarService) {}
+  constructor(
+    private readonly calendarService: CalendarService,
+    private authService: AuthService
+  ) {}
 
   event: CalendarEvent = {
     summary: 'Mi Primera rueda',
@@ -24,9 +28,22 @@ export class CreateRoundsComponent {
     attendees: [],
   };
 
-  createEvent() {
+  async createEvent() {
     console.log(this.event);
-    this.calendarService.createEvent(this.event);
+    const event: CalendarEvent = await this.calendarService.createEvent(
+      this.event
+    );
+    console.log('this is my event');
+
+    const userId = await this.authService.getUserId();
+
+    const round: Round = {
+      event_id: event.id || '',
+      user_id: userId,
+    };
+
+    await this.authService.addRound(round);
+    console.log(round);
   }
 
   inputAttendee = '';
