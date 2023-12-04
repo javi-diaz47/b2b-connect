@@ -1,224 +1,203 @@
 <div class="container">
-  <div class="container-form">
-    <div class="row">
-      <div class="col-8">
-        <form #login_user="ngForm" (ngSubmit)="onUpdateUser()">
-          <div class="mb-3" class="text-center" style="margin-bottom: 25px">
-            <h4>Editar perfil</h4>
-          </div>
 
-          <div class="row">
-            <div class="col">
-              <div class="form-floating mb-3">
-                <input
-                  type="name"
-                  class="form-control"
-                  id="floatingInput"
-                  placeholder="name@example.com"
-                  name="name"
-                  required
-                  [(ngModel)]="user.name"
-                />
-                <label for="floatingInput">Nombre</label>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col">
-              <div class="form-floating mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="floatingInput"
-                  placeholder=""
-                  name="lastname"
-                  [(ngModel)]="user.lastname"
-                />
-                <label for="floatingInput">Apellido</label>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col">
-              <div class="form-floating mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="floatingInput"
-                  placeholder=""
-                  name="history"
-                  [(ngModel)]="user.history"
-                />
-                <label for="floatingInput">Historia</label>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col">
-              <div class="form-floating mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="floatingInput"
-                  placeholder=""
-                  name="objective"
-                  [(ngModel)]="user.objetives"
-                />
-                <label for="floatingInput">Objetivo</label>
-              </div>
-            </div>
-          </div>
-
-          <div class="d-grid gap-2">
-            <button
-              class="btn btn-primary"
-              type="submit"
-              [disabled]="login_user.invalid"
-            >
-              Actualizar mis datos
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <!-- Projects -->
-  <div class="container-form">
-    <div class="row">
-      <div class="col-8 mt-5">
-        <!-- Add new project -->
-        <div>
-          <div class="mb-3" class="text-center" style="margin-bottom: 25px">
-            <h4>Agregar un nuevo proyecto</h4>
-          </div>
-          <div class="form-floating mb-3">
-            <input
-              type="text"
-              required
-              class="form-control"
-              id="floatingInput"
-              placeholder="name@example.com"
-              name="title-{{ inputProject.id }}"
-              [(ngModel)]="inputProject.title"
-            />
-            <label for="floatingInput">Titulo</label>
-          </div>
-          <div class="form-floating mb-3">
-            <textarea
-              class="form-control h-8"
-              required
-              id="floatingInput"
-              placeholder=""
-              name="description-{{ inputProject.id }}"
-              rows="4"
-              [(ngModel)]="inputProject.description"
-            ></textarea>
-            <label for="floatingInput">Descripcion</label>
-          </div>
-
-          <!-- If not filled the inputs -->
-          <div *ngIf="unfilledNewProject === true">
-            <p>Por favor, rellene todos los campos</p>
-          </div>
-
-          <button type="button" (click)="addProject()">Agregar proyecto</button>
+  <!--Editar perfil-->
+  <div class="row">
+    <div class="col-6">
+      <div class="card">
+        <div class="card-header border-primary">
+          <h4 class="text-center">Editar perfil</h4>
         </div>
 
-        <form #login_user="ngForm" (ngSubmit)="onUpdateProjects()">
-          <div class="mb-3" class="text-center" style="margin-bottom: 25px">
-            <h4>Editar Proyectos</h4>
+        <div class="card-body">
+          <form #login_user="ngForm" (ngSubmit)="onUpdateUser()">
+            <div class="row">
+              <div class="col">
+                <div class="form-floating mb-3">
+                  <input type="name" class="form-control" id="floatingInput" placeholder="name@example.com" name="name"
+                    required [(ngModel)]="user.name" />
+                  <label for="floatingInput">Nombre</label>
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="floatingInput" placeholder="" name="lastname"
+                    [(ngModel)]="user.lastname" />
+                  <label for="floatingInput">Apellido</label>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="floatingInput" placeholder="" name="history"
+                    [(ngModel)]="user.history" />
+                  <label for="floatingInput">Historia</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="floatingInput" placeholder="" name="objective"
+                    [(ngModel)]="user.objetives" />
+                  <label for="floatingInput">Objetivo</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-grid gap-2">
+              <button class="btn  btn-outline-primary" type="submit" [disabled]="login_user.invalid">
+                Actualizar mis datos
+              </button>
+            </div>
+          </form>
+        </div>
+      </div> <!--Card, editar perfil-->
+
+    </div>
+
+    <!--Areas de experiencias-->
+    <div class="col-6">
+      <div class="card">
+        <div class="card-header border-primary text-center">
+          <h4>Areas de experiencias</h4>
+        </div>
+        <div class="card-body">
+          <div>
+            <div class="row">
+              <div class="col-8">
+                <div class="form-floating mb-3">
+                  <input [(ngModel)]="inputExperienceArea" type="text" class="form-control" id="floatingInput"
+                    placeholder="Ingresa un area de experiencia" list="experience-areas">
+                  <label for="floatingInput">Areas de Experiencia</label>
+                </div>
+              </div>
+              <div class="col">
+                <button class="btn btn-success" (click)="addExperienceArea()">
+                  Agregar
+                </button>
+              </div>
+            </div>
+
+            <div *ngIf="isExperienceAreaDuplicated">
+              <p>Ya tienes esta area de experiencia en tu lista</p>
+            </div>
+            <datalist id="experience-areas">
+              <option *ngFor="let area of AREAS" value="{{ area.area }}"></option>
+            </datalist>
+
           </div>
 
-          <div>
-            <!-- Edit old projects -->
-            <ul class="m-0 p-0">
-              <li *ngFor="let project of user.projects" class="list-unstyled">
-                <div
-                  class="mb-3"
-                  class="text-center"
-                  style="margin-bottom: 25px"
-                >
-                  <h6>{{ project.title }}</h6>
-                </div>
-
-                <div class="form-floating mb-3">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="name@example.com"
-                    name="title-{{ project.id }}"
-                    [(ngModel)]="project.title"
-                  />
-                  <label for="floatingInput">Titulo</label>
-                </div>
-                <div class="form-floating mb-3">
-                  <textarea
-                    class="form-control h-8"
-                    placeholder=""
-                    name="description-{{ project.id }}"
-                    rows="4"
-                    [(ngModel)]="project.description"
-                  ></textarea>
-                  <label for="floatingInput">Descripcion</label>
-                </div>
-                <button (click)="removeProject(project.id || '')">
+          <div *ngIf="user.userExperienceAreas" style="margin-top: 10px;">
+            <h4>Lista</h4>
+            <ul>
+              <li *ngFor="let area of user.userExperienceAreas" style="margin-top: 10px;">
+                {{ area.area }}
+                <button class="btn btn-danger" (click)="removeExperienceArea(area.id || '')">
                   Remove
                 </button>
               </li>
             </ul>
           </div>
 
-          <div class="d-grid gap-2">
-            <button class="btn btn-primary" type="submit">
-              Actualizar mis datos
-            </button>
+          <div class="d-grid gap-2" (click)="onUpdateExperienceAreas()">
+            <button class="btn btn-outline-primary">Actualizar mis datos</button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Experience Area -->
-  <div class="container-form">
-    <div class="row">
-      <div class="col-8 mt-5">
-        <div>
-          <input
-            [(ngModel)]="inputExperienceArea"
-            placeholder="Ingresa un area de experiencia"
-            list="experience-areas"
-          />
-          <div *ngIf="isExperienceAreaDuplicated">
-            <p>Ya tienes esta area de experiencia en tu lista</p>
+
+  <!-- Proyectos -->
+  <div class="row" style="margin-top: 25px;">
+    <div class="col-6">
+      <!-- Projects -->
+      <div class="card ">
+        <div class="card-header border-primary text-center">
+          <h4>Agregar proyecto</h4>
+        </div>
+        <div class="card-body">
+          <!-- Add new project -->
+          <div>
+
+            <div class="form-floating mb-3">
+              <input type="text" required class="form-control" id="floatingInput" placeholder="name@example.com"
+                name="title-{{ inputProject.id }}" [(ngModel)]="inputProject.title" />
+              <label for="floatingInput">Titulo</label>
+            </div>
+            <div class="form-floating mb-3">
+              <textarea style="height: 110px;" class="form-control h-8" required id="floatingInput" placeholder=""
+                name="description-{{ inputProject.id }}" rows="4" [(ngModel)]="inputProject.description"></textarea>
+              <label for="floatingInput">Descripcion</label>
+            </div>
+
+            <!-- If not filled the inputs -->
+            <div *ngIf="unfilledNewProject === true">
+              <p>Por favor, rellene todos los campos</p>
+            </div>
+
+            <button type="button" class="btn btn-success" (click)="addProject()">Agregar</button>
           </div>
-          <datalist id="experience-areas">
-            <option *ngFor="let area of AREAS" value="{{ area.area }}"></option>
-          </datalist>
-          <button (click)="addExperienceArea()">
-            Agregar area de experiencia
-          </button>
-        </div>
 
-        <div *ngIf="user.userExperienceAreas">
-          <h4>Areas de Experiencia</h4>
-          <ul>
-            <li *ngFor="let area of user.userExperienceAreas">
-              {{ area.area }}
-              <button (click)="removeExperienceArea(area.id || '')">
-                Remove
-              </button>
-            </li>
-          </ul>
-        </div>
+          <hr>
 
-        <div class="d-grid gap-2" (click)="onUpdateExperienceAreas()">
-          <button class="btn btn-primary">Actualizar misaaa datos</button>
+          <form #login_user="ngForm" (ngSubmit)="onUpdateProjects()">
+            <div class="card-header border-primary text-center" style="margin-bottom: 20px;">
+                <h5>Editar Proyectos</h5>
+            </div>
+
+
+            <div>
+              <!-- Edit old projects -->
+            
+              <ul class="m-0 p-0">
+                <li *ngFor="let project of user.projects" class="list-unstyled">
+                  <div class="mb-3" class="text-center" style="margin-bottom: 25px">
+                    <h6>{{ project.title }}</h6>
+                  </div>
+
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" placeholder="name@example.com" name="title-{{ project.id }}"
+                      [(ngModel)]="project.title" />
+                    <label for="floatingInput">Titulo</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <textarea style="height: 110px;" class="form-control h-8" placeholder="" name="description-{{ project.id }}" rows="4"
+                      [(ngModel)]="project.description"></textarea>
+                    <label for="floatingInput">Descripcion</label>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="d-grid gap-2">
+                        <button class="btn  btn-primary" type="submit">
+                          Actualizar mis datos
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="col">
+                      <div class="d-grid gap-2">
+                        <button class="btn btn-danger" (click)="removeProject(project.id || '')">
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                </li>
+              </ul>
+            </div>
+
+
+          </form>
         </div>
       </div>
     </div>
   </div>
+
 </div>
+<!--Fin del container-->
