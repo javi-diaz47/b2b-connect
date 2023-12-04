@@ -6,8 +6,10 @@ import { UserComponent } from './pages/account/user/user.component';
 import { EditComponent } from './pages/account/edit/edit.component';
 import { MyRoundsComponent } from './pages/rounds/my-rounds/my-rounds.component';
 import { CreateRoundsComponent } from './pages/rounds/create-rounds/create-rounds.component';
+import { HomeComponent } from './pages/home/home.component';
 
 const routes: Routes = [
+  { path: '', component: HomeComponent },
   {
     path: 'login',
     component: LoginComponent,

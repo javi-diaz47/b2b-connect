@@ -11,6 +11,7 @@ import { NavbarModule } from './shared/navbar/navbar.module';
 import { EditComponent } from './pages/account/edit/edit.component';
 import { CreateRoundsComponent } from './pages/rounds/create-rounds/create-rounds.component';
 import { MyRoundsComponent } from './pages/rounds/my-rounds/my-rounds.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { MyRoundsComponent } from './pages/rounds/my-rounds/my-rounds.component'
     EditComponent,
     CreateRoundsComponent,
     MyRoundsComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
