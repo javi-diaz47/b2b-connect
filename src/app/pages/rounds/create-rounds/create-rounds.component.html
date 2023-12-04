@@ -1,31 +1,92 @@
-<h2>Rueda de negocios</h2>
-<div>
-  <label>Nombre del evento:</label>
-  <input type="text" [(ngModel)]="event.summary" />
-</div>
-<div>
-  <label>Descripcion:</label>
-  <input type="text" [(ngModel)]="event.description" />
-</div>
-<div>
-  <label for="meet-start-time">Inicio:</label>
-  <input
-    type="datetime-local"
-    id="meet-start-time"
-    name="meeting-start-time"
-    [(ngModel)]="event.start.dateTime"
-  />
-</div>
-<div>
-  <label for="meet-end-time">Fin:</label>
-  <input
-    type="datetime-local"
-    id="meet-end-time"
-    name="meeting-end-time"
-    [(ngModel)]="event.end.dateTime"
-  />
-</div>
-<!-- <div>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <div class="card">
+        <div class="card-header">
+          <h2>Rueda de negocios</h2>
+        </div>
+        <div class="card-body">
+
+          <div class="form-floating mb-3">
+            <input type="text" [(ngModel)]="event.summary" class="form-control" id="floatingInput" placeholder="">
+            <label for="floatingInput">Nombre del evento</label>
+          </div>
+
+          
+          <div class="form-floating mb-3">
+            <input type="text" [(ngModel)]="event.description" class="form-control" id="floatingInput" placeholder="">
+            <label for="floatingInput">Descripción</label>
+          </div>
+
+          <div class="row">
+            <div class="col">
+             
+              <div class="form-floating mb-3">
+                <input type="datetime-local"  name="meeting-start-time" [(ngModel)]="event.start.dateTime" class="form-control" id="floatingInput meet-start-time"
+                  placeholder="">
+                <label for="floatingInput meet-start-time">Inicio</label>
+              </div>
+            </div>
+
+            <div class="col">
+             
+              <div class="form-floating mb-3">
+                <input type="datetime-local" name="meeting-end-time" [(ngModel)]="event.end.dateTime" class="form-control" id="floatingInput meet-end-time"
+                  placeholder="">
+                <label for="floatingInput meet-end-time">Fin</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              
+              <div class="form-floating mb-3">
+                <input  [(ngModel)]="inputAttendee" class="form-control" id="floatingInput" placeholder="">
+                <label for="floatingInput">Add Attendee</label>
+              </div>
+            </div>
+            <div class="col">
+              <button class="btn btn-outline-primary" (click)="addAttendee()">Add Attendee</button>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <div class="mb-3">
+                <button class="btn btn-primary" (click)="createEvent()">Crear rueda de negocios</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <div *ngIf="event.attendees && event.attendees.length">
+
+        <div class="card">
+          <div class="card-header">
+            <h4>Lista de invitados</h4>
+          </div>
+
+          <div class="card-bady">
+            <ul>
+              <li style="margin-top: 15px;" *ngFor="let attendee of event.attendees">
+                {{ attendee.email }}
+                <button class="btn btn-danger" (click)="removeAttendee(attendee.email)">Remove</button>
+              </li>
+            </ul>
+          </div>
+
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- <div>
   <input [(ngModel)]="inputAttendee" placeholder="Enter a value" />
   <button (click)="addAttendee()">Add</button>
 </div>
@@ -34,27 +95,14 @@
   <li *ngFor="let attendee of event.attendees">{{ attendee }}</li>
 </ul> -->
 
-<div>
-  <input [(ngModel)]="inputAttendee" placeholder="Enter attendee email" />
-  <button (click)="addAttendee()">Add Attendee</button>
+
+  <div *ngIf="isValidAttendee === 'NOT VALID'">
+    <p>Por favor, ingresa un correo electronico valida</p>
+  </div>
+
+  <div *ngIf="isValidAttendee === 'DUPLICATED'">
+    <p>Este correo ya está en la lista de asistentes</p>
+  </div>
+
 </div>
 
-<div *ngIf="isValidAttendee === 'NOT VALID'">
-  <p>Por favor, ingresa un correo electronico valida</p>
-</div>
-
-<div *ngIf="isValidAttendee === 'DUPLICATED'">
-  <p>Este correo ya está en la lista de asistentes</p>
-</div>
-
-<div *ngIf="event.attendees && event.attendees.length">
-  <h4>Lista de invitados</h4>
-  <ul>
-    <li *ngFor="let attendee of event.attendees">
-      {{ attendee.email }}
-      <button (click)="removeAttendee(attendee.email)">Remove</button>
-    </li>
-  </ul>
-</div>
-
-<button (click)="createEvent()">Crear rueda de negocios</button>
