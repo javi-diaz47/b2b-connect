@@ -29,7 +29,7 @@ export class CalendarService {
     };
   }
 
-  async createEvent(event: CalendarEvent) {
+  async createEvent(event: CalendarEvent): Promise<GetEvents> {
     const { email, providerToken } = this.getEmailAndProviderToken();
 
     event.start.dateTime = new Date(event.start.dateTime).toISOString();
@@ -55,8 +55,32 @@ export class CalendarService {
         console.log(data);
         if (!data.error) {
           alert('La rueda de negocios fue agendada con exito!');
+          return { event: data };
         }
+        return { event: data.error };
+      });
+  }
+
+  async getEvents(): Promise<GetEvents> {
+    const { email, providerToken } = this.getEmailAndProviderToken();
+
+    return await fetch(CALENDAR_API, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${providerToken}`,
+      },
+    })
+      .then((data) => {
+        return data.json();
+      })
+      .then((data) => {
+        console.log(data);
         return data;
       });
   }
+}
+
+interface GetEvents {
+  event?: CalendarEvent;
+  error?: any;
 }

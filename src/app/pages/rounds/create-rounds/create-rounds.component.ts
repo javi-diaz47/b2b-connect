@@ -30,20 +30,27 @@ export class CreateRoundsComponent {
 
   async createEvent() {
     console.log(this.event);
-    const event: CalendarEvent = await this.calendarService.createEvent(
-      this.event
-    );
-    console.log('this is my event');
+    const res = await this.calendarService.createEvent(this.event);
 
-    const userId = await this.authService.getUserId();
+    console.log(res);
+    if (res.error) {
+      console.log('Se produjo un error');
+      return;
+    }
 
-    const round: Round = {
-      event_id: event.id || '',
-      user_id: userId,
-    };
+    if (res.event) {
+      console.log('this is my event');
 
-    await this.authService.addRound(round);
-    console.log(round);
+      const userId = await this.authService.getUserId();
+
+      const round: Round = {
+        event_id: res.event.id || '',
+        user_id: userId,
+      };
+
+      await this.authService.addRound(round);
+      console.log(round);
+    }
   }
 
   inputAttendee = '';
